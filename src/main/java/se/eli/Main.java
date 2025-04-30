@@ -8,38 +8,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+
     public static void main(String[] args) {
-        // Rabatt-exempel
-        Item item1 = new Item("Laptop", 1000.00, 1);
+        //Items
+        Item item1 = new Item("Laptop", 1000.00,1);
         Item item2 = new Item("Phone", 500.00, 2);
 
+        double totalBeforeDiscount = item1.getTotalPrice() + item2.getTotalPrice();
+        System.out.println("Total price before discount: " + totalBeforeDiscount);
+
+
+        // Discount
         double discount = 10.0;
+        double discountAmount = totalBeforeDiscount * (discount / 100);
+        double totalAfterDiscount = totalBeforeDiscount - discountAmount;
+        System.out.println("Discount: $" + discountAmount);
+        System.out.println("Total after discount: $" + totalAfterDiscount);
 
-        printTotals(item1, item2, discount);
-        printTotals(item1, item2, discount); // Samma beräkning igen
+        List<IAnimal> animalList = new ArrayList<>();
 
-        System.out.println("\n--- Animal sounds ---");
-
-        // Polymorfism-exempel
         IAnimal bird = new Bird();
         IAnimal dog = new Dog();
 
-        List<IAnimal> animals = new ArrayList<>();
-        animals.add(bird);
-        animals.add(dog);
 
-        for (IAnimal animal : animals) {
+        animalList.add(bird);
+        animalList.add(dog);
+
+        for (IAnimal animal : animalList) {
             animal.makeSound();
         }
+
+        Product product1 = new Product("Phone", 2000.00);
+        Product product2 = new Product("Laptop", 5000.00);
+
+        List<Product> products = new ArrayList<>();
+        products.add(product1);
+        products.add(product2);
+
+        // Räkna ut totalpriset
+        double totalPrice = 0.0;
+        for (Product product : products) {
+            totalPrice += product.getPrice();
+        }
+        System.out.println("Total price before discount: $" + totalPrice);
+
+        IDiscount discount1 = new TwentyFivePercentDiscount();
+        double discountedPrice = discount1.applyDiscount(totalPrice);
+
+        System.out.println("Total price after discount: $" + discountedPrice);
     }
 
-    public static void printTotals(Item item1, Item item2, double discount) {
-        double totalBeforeDiscount = item1.getTotalPrice() + item2.getTotalPrice();
-        double discountAmount = totalBeforeDiscount * (discount / 100);
-        double totalAfterDiscount = totalBeforeDiscount - discountAmount;
-
-        System.out.println("Total before discount: $" + totalBeforeDiscount);
-        System.out.println("Discount: $" + discountAmount);
-        System.out.println("Total after discount: $" + totalAfterDiscount);
-    }
 }
