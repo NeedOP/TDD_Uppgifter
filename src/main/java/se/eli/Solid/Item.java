@@ -1,4 +1,4 @@
-package se.eli;
+package se.eli.Solid;
 
 public class Item {
     private String name;

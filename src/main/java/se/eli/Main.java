@@ -1,5 +1,9 @@
 package se.eli;
 
+import se.eli.Solid.IDiscount;
+import se.eli.Solid.Item;
+import se.eli.Solid.Product;
+import se.eli.Solid.TwentyFivePercentDiscount;
 import se.eli.animal.Bird;
 import se.eli.animal.Dog;
 import se.eli.animal.IAnimal;
@@ -53,7 +57,8 @@ public class Main {
         }
         System.out.println("Total price before discount: $" + totalPrice);
 
-        IDiscount discount1 = new TwentyFivePercentDiscount();
+        // Applicera rabatt
+        IDiscount discount1 = new TwentyFivePercentDiscount(); // Eller TenPercentDiscount
         double discountedPrice = discount1.applyDiscount(totalPrice);
 
         System.out.println("Total price after discount: $" + discountedPrice);
